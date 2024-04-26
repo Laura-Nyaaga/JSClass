@@ -35,3 +35,48 @@ class Rental {
 }
 const uber = new Rental ('Audi', 'Maryann', "2024-4-12", "2024-6-6")
 console.log({uber});
+
+class Question {
+    constructor(text, options, correctAnswer) {
+      this.text = text;
+      this.options = options;
+      this.correctAnswer = correctAnswer;
+    }
+    checkAnswer(userAnswer) {
+      return userAnswer === this.correctAnswer;
+    }
+  }
+  const sampleQuestion = new Question(
+    "What is the capital of France?",
+    ["Paris", "London", "Berlin", "Madrid"],
+  );
+  console.log(sampleQuestion.checkAnswer("Paris"));
+  console.log(sampleQuestion.checkAnswer("London"));
+  class Quiz {
+    constructor() {
+      this.questions = [];
+      this.currentQuestionIndex = 0;
+      this.score = 0;
+    }
+    addQuestion(question) {
+      this.questions.push(question);
+    }
+    nextQuestion() {
+      this.currentQuestionIndex++;
+    }
+    submitAnswer(userAnswer) {
+      const currentQuestion = this.questions[this.currentQuestionIndex];
+      if (currentQuestion.checkAnswer(userAnswer)) {
+        this.score++;
+      }
+      this.nextQuestion();
+    }
+  }
+  const quiz = new Quiz();
+  const question1 = new Question("What is 2 + 2?", ["3", "4", "5"], "4");
+  const question2 = new Question("Who wrote 'Born'?", ["Shakespeare", "Hemingway", "Tolstoy"], "Shakespeare");
+  quiz.addQuestion(question1);
+  quiz.addQuestion(question2);
+  quiz.submitAnswer("4");
+  quiz.submitAnswer("Shakespeare");
+  console.log("Score:", quiz.score);
